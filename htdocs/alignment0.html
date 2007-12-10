@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>solid liquid alignment</title>
+</head>
+<body>
+<h3 style="text-align: center;"><img style="width: 120px; height: 393px;" alt="alignment" src="alignment1.png"><br>
+</h3>
+<h3>Locate the crystal</h3>
+Move mph to <span style="color: rgb(51, 51, 153);">10 mm</span> above the liquid sample cell by moving the manipulator plate-to-plate distance <em style="color: rgb(51, 51, 153);">108.5mm</em>. Set the manipulator height zero and limits.<br>
+<code><span style="color: rgb(0, 153, 0);">set mph 0</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">set_lm mph -9 5</span><br>
+</code>Move chamber height to make the beam pass through the chamber at <em style="color: rgb(51, 51, 153);">103mm</em>
+below the top 13 1/4" flange. Move motor sx to find the crystal center.
+Move motor sx to place the sample crystal center at the beam center.<br>
+<br>
+<h3>Motor mpr alignment</h3>
+Move motor sh down to cut the beam intensity by 90%.<br>
+<code><span style="color: rgb(0, 153, 0);">dscan sh</span><br style="color: rgb(0, 153, 0);">
+<br>
+</code>Scan motor mpr to maximize detector counts. set mpr 0<br>
+<code style="color: rgb(0, 153, 0);">dscan mpr<br>
+set mpr 0<br>
+set sh 0</code><br style="color: rgb(0, 153, 0);">
+<code><span style="color: rgb(0, 153, 0);">umi -0.2 -0.2</span><br>
+<br>
+</code>open s3v s2v<br>
+<code><span style="color: rgb(0, 153, 0);">s3v 5 5</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">s2v 5 5</span><br>
+<br>
+</code>dscan sh to find sh center, move sh center<br>
+<code><span style="color: rgb(0, 153, 0);">dscan sh</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">umv sh CEN</span><br>
+<br>
+</code>close up s3v<br>
+<code style="color: rgb(0, 153, 0);">s3v 0.3 0.3</code><br>
+dscan mpr to find mpr center. Move mpr to center, set mpr 0<br>
+<code style="color: rgb(0, 153, 0);">dscan mpr<br>
+umv mpr CEN<br>
+set mpr 0<br>
+</code><span style="color: rgb(0, 153, 0);">&nbsp;</span><br>
+<h3>g_l2 and g_l3</h3>
+<code><span style="color: rgb(0, 153, 0);">umi -0.06 -0.06</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">s3v 5 5</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">shscan sh -0.015 0.015 20 1</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">umv sh CEN</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">s3v 0.3 0.3</span><br style="color: rgb(0, 153, 0);">
+<span style="color: rgb(0, 153, 0);">oscan 0.5 20 1</span><br>
+</code><br>
+Repeat for further angles.<code></code>
+</body>
+</html>
