@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.61)
 AC_INIT(FULL-PACKAGE-NAME, VERSION, BUG-REPORT-ADDRESS)
-AC_CONFIG_SRCDIR([cgi-bin/GARealGenome.cpp])
+AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADER([config.h])
 
 # Checks for programs.
@@ -11,18 +11,6 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
-# FIXME: Replace `main' with a function in `-lgomp':
-AC_CHECK_LIB([gomp], [main])
-# FIXME: Replace `main' with a function in `-lgrace_np':
-AC_CHECK_LIB([grace_np], [main])
-# FIXME: Replace `main' with a function in `-lgsl':
-AC_CHECK_LIB([gsl], [main])
-# FIXME: Replace `main' with a function in `-lgslcblas':
-AC_CHECK_LIB([gslcblas], [main])
-# FIXME: Replace `main' with a function in `-lmysqlpp':
-AC_CHECK_LIB([mysqlpp], [main])
-# FIXME: Replace `main' with a function in `-lpthread':
-AC_CHECK_LIB([pthread], [main])
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -43,5 +31,6 @@ AC_FUNC_FORK
 AC_FUNC_STRTOD
 AC_CHECK_FUNCS([gettimeofday pow sqrt])
 
-AC_CONFIG_FILES([cgi-bin/Makefile])
+AC_CONFIG_FILES([Makefile
+                 cgi-bin/Makefile])
 AC_OUTPUT
