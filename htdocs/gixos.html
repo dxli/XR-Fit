@@ -1,0 +1,644 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>GIXOS Model Fitting</title>
+  <script type="text/javascript" language="javascript">
+    </script>
+  
+  
+  <style>
+    .inputform
+    {
+        
+        display:block;
+    }
+    
+    .displayframe
+    {
+        text-align:center;
+        border:1px solid gray;
+        width:600px;
+        height:700px;
+        display:none;
+        
+    }
+    
+    .dframe
+    {
+        text-align:center;
+        width:100%;
+        height:100%; 
+        overflow:auto;
+        
+    }
+    
+    .input
+    {
+        border:1px dashed;
+ color: rgb(0, 0, 245);
+ font-weight: bold;
+        background-color:#dEe6eF;
+        text-align:right;
+    }
+    
+    .label
+    {
+        width:300px;
+        text-align:right;
+        vertical-align:top;
+    
+    }
+    
+    .input_place
+    {
+        background-color:#ffF6FF;
+        border-top:2px solid gray;
+        border-left:2px solid gray;
+        border-right:2px solid gray;
+        border-bottom:2px solid gray;
+        vertical-align:center;
+    }
+    
+    .thetable
+    {
+        border-collapse:collapse;
+        
+    }
+
+    .text0
+    {
+        text-align:left;
+ vertical-align: center;
+    }
+    
+    body
+    {
+        text-align:center;
+    }
+    
+    </style>
+</head>
+
+
+<body>
+
+
+<div xmlns="http://www.w3.org/1999/xhtml">
+
+  
+
+    
+    
+    
+
+
+
+<h2>X-ray Reflectivity Model Fitting</h2>
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+
+<div id="displayframe" class="displayframe">
+    <iframe src="wait.php" class="dframe">
+    </iframe>
+</div>
+
+
+
+
+<div id="inputform" class="inputform">
+<form method="post" action="post-gixos.php" enctype="multipart/form-data">
+    Please upload the X-ray Reflectivity data file or paste it in the input box
+  
+  
+  <p></p>
+
+
+
+
+Interface information
+    
+  
+  
+  <table align="center" border="0">
+    <tbody>
+      <tr>
+        <td class="label">Your email address:</td>
+        <td class="input_place"><input class="input" name="email" value="" onblur="validate_email();" type="text"></td>
+    </tr>
+    <tr>
+        <td class="label">Number of iterations:</td>
+        <td class="input_place"><input class="input" name="maxisteps" value="100" size="3" maxlength="3" type="text"></td>
+    </tr>
+    <tr>
+    </tr>
+    <tr class="text0">
+    <td></td>
+    <td style="text-align: center;">Chemical Formula</td>
+    <td style="text-align: center;">Density (g/cm<sup>3</sup>)</td>
+      </tr>
+    <tr class="text0">
+    <td class="label">Top phase</td>
+        <td class="input_place"><select name="top">
+        <option></option>
+        <option selected="selected">Vacuum/Air</option>
+        <option>H2O</option>
+        <option>Be</option>
+        <option>C</option>
+        <option>Si</option>
+        <option>Ga</option>
+        </select><input class="input" name="formula0" type="text" size="10">
+        <br>Expample: Si (Leave blank for vacuum)</td>
+        <td class="input_place">
+            <input class="input" size="5" maxlength="5" name="rhoin0" type="text"> g/cm<sup>3</sup>
+        </td>
+    </tr>
+
+
+
+    <tr class="text0">
+
+
+
+       <td class="label">Maximum density phase</td>
+
+
+
+        <td class="input_place">
+       
+        <select name="maximum">
+        <option ></option>
+        <option>H2O</option>
+        <option>Lipids</option>
+        <option>Be</option>
+        <option>Si</option>
+        <option>Ga</option>
+        <option selected="selected">Au</option>
+        <option>Pb</option>
+        </select>
+            <input class="input" name="formula12" type="text">
+
+
+        <br>
+
+
+Expample: Au (Leave blank for default)</td>
+
+
+
+        
+        <td class="input_place">
+            <input class="input" size="5" maxlength="5" name="rhoin12" value="" type="text"> g/cm<sup>3</sup>
+        </td>
+
+
+
+    </tr>
+
+
+
+    <tr class="text0">
+
+
+
+       <td class="label">Substrate phase</td>
+        <td class="input_place">
+        <select name="substrate">
+        <option ></option>
+        <option selected="selected">H2O</option>
+        <option>Ga</option>
+        <option>Pb</option>
+        </select>
+            <input class="input" name="formula1" type="text">
+       <br>
+Expample: H2O (You have to specify a density for a compound)
+        </td>
+
+
+        <td class="input_place">
+            <input class="input" size="5" maxlength="5" name="rhoin1" type="text"> g/cm<sup>3</sup>
+        </td>
+
+
+
+    </tr>
+
+
+
+       <tr class="text0">
+
+
+
+       <td class="label">Interface thickness<br>
+
+
+(Total Slab Length)</td>
+
+
+
+        <td class="input_place">
+            <input class="input" name="slab" value="30" size="6" maxlength="6" type="text"> &Aring;</td>
+
+
+
+       <tr class="text0">
+
+       <td class="label">Number of Slabs</td>
+        <td class="input_place">
+            <input class="input" name="nslab" value="32" size="4" maxlength="4" type="text"> </td>
+    </tr>
+            <tr class="text0">
+            <td class="label">GIXOS</td>
+             <TD class="input_place">
+              dth: <INPUT class="input" TYPE="text" NAME="dth" value="0.3" size="5" maxlength="5"> &deg; </TD>
+               <TD class="input_place"> Incident Angle:
+                    <INPUT class="input" TYPE="text" NAME="alpha0" value="0.1" size="5" maxlength="5"> &deg;</TD>
+               <TD class="input_place"> Surface tension:
+                    <INPUT class="input" TYPE="text" NAME="gamma" value="30" size="5" maxlength="5"> mN/m </TD>
+               <TD class="input_place"> Bulk molecule diameter:
+                    <INPUT class="input" TYPE="text" NAME="sigmad" value="2.7" size="5" maxlength="5"> &Aring; </TD>
+                 </tr>
+
+
+   </tr>
+
+
+
+        <tr class="text0">
+
+
+
+       <td class="label">X-ray Photon Energy</td>
+
+
+
+        <td class="input_place">
+            <input class="input" name="energy" value="10" size="6" maxlength="6" type="text"> KeV</td>
+
+
+
+    </tr>
+
+
+
+        <tr class="text0" style="border-collapse: collapse;">
+
+
+
+       <td class="label">q<sub>z</sub> Range used in fitting</td>
+
+
+
+        <td class="input_place" style="text-align: center;">
+ q<sub>z,min</sub>=<input class="input" name="qmin" value="0.01" size="6" maxlength="6" type="text"> &Aring;<sup>-1</sup></td>
+
+
+
+        <td class="input_place" style="text-align: center;">
+ q<sub>z,max</sub>=<input class="input" name="qmax" value="0.5" size="6" maxlength="6" type="text"> &Aring;<sup>-1</sup></td>
+
+
+
+    </tr>
+
+
+
+
+    <tr border="2">
+
+
+
+        <td border="0" class="label">Data format</td>
+
+
+
+        <td class="label" style="text-align: center;" border="2">
+            <b>q<sub>z</sub>&nbsp; R(q<sub>z</sub>)&nbsp; </b> &nbsp; (q<sub>z</sub> in &Aring;<sup>-1</sup>) 
+        </td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+        <td class="label">
+            Select a file to upload
+        </td>
+
+
+
+        <td class="label" style="text-align: center;">
+            <input class="input" name="uploaded" type="file">
+     <br>
+
+
+(the program will choose file over the data in the following input box)
+        </td>
+
+
+
+    </tr>
+
+
+
+    
+    
+    </tbody>
+  
+  
+  </table>
+
+  
+  <p>
+ <textarea name="pasted" style="text-align: left; width: 500px; background-color: rgb(238, 246, 255);" id="pasted" rows="20" cols="80">
+0.00017154 0.13416
+0.0021504 0.17177
+0.0041293 0.51807
+0.0061082 0.45051
+0.0080871 0.26784
+0.010066 0.25942
+0.012045 0.29864
+0.014024 0.48514
+0.016003 0.87002
+0.017982 1.5006
+0.01996 2.2832
+0.021939 2.0877
+0.023918 1.3857
+0.025897 1.1758
+0.027876 1.1181
+0.029855 1.0673
+0.031834 1.0701
+0.033813 1.0084
+0.035791 1.0367
+0.03777 1.0226
+0.039749 1
+0.041728 1.0058
+0.043707 1.0668
+0.045685 1.0444
+0.047664 1.0743
+0.049643 1.0265
+0.051622 0.99406
+0.0536 0.9727
+0.055579 0.99579
+0.057558 1.0347
+0.059536 1.044
+0.061515 1.039
+0.063493 1.1106
+0.065472 0.99768
+0.067451 1.0956
+0.069429 1.1019
+0.071408 1.1182
+0.073386 1.1362
+0.075365 1.1668
+0.077343 1.1487
+0.079322 1.1513
+0.0813 1.1485
+0.083278 1.1472
+0.085257 1.1423
+0.087235 1.1615
+0.089213 1.1797
+0.091191 1.1633
+0.09317 1.117
+0.095148 1.1052
+0.097126 1.1423
+0.099104 1.1105
+0.10108 1.1126
+0.10306 1.0952
+0.10504 1.1106
+0.10702 1.0894
+0.10899 1.1389
+0.11097 1.1604
+0.11295 1.1558
+0.11493 1.0971
+0.1169 1.108
+0.11888 1.1394
+0.12086 0.97352
+0.12284 1.064
+0.12481 1.0021
+0.12679 1.0534
+0.12877 0.97533
+0.13075 0.97074
+0.13272 0.99925
+0.1347 0.92175
+0.13668 0.94085
+0.13866 0.92335
+0.14063 0.84076
+0.14261 0.88401
+0.14459 0.87409
+0.14656 0.80657
+0.14854 0.8064
+0.15052 0.79057
+0.15249 0.76163
+0.15447 0.70827
+0.15645 0.72801
+0.15842 0.66937
+0.1604 0.66802
+0.16238 0.67039
+0.16435 0.56682
+0.16633 0.55441
+0.16831 0.59685
+0.17028 0.53098
+0.17226 0.4399
+0.17423 0.45482
+0.17621 0.51763
+0.17818 0.49734
+0.18016 0.45411
+0.18214 0.39084
+0.18411 0.37872
+0.18609 0.36909
+0.18806 0.36898
+0.19004 0.32701
+0.19201 0.28617
+0.19399 0.27375
+0.19596 0.26197
+0.19794 0.28461
+0.19991 0.24053
+0.20189 0.26622
+0.20386 0.24066
+0.20584 0.23667
+0.20781 0.2352
+0.20979 0.21284
+0.21176 0.19406
+0.21374 0.2098
+0.21571 0.19006
+0.21768 0.16832
+0.21966 0.18159
+0.22163 0.17641
+0.2236 0.16563
+0.22558 0.1891
+0.22755 0.19819
+0.22953 0.18798
+0.2315 0.19782
+0.23347 0.14066
+0.23545 0.16609
+0.23742 0.15928
+0.23939 0.17536
+0.24136 0.2035
+0.24334 0.21593
+0.24531 0.20945
+0.24728 0.24564
+0.24926 0.25161
+0.25123 0.25516
+0.2532 0.28516
+0.25517 0.23336
+0.25715 0.29806
+0.25912 0.28761
+0.26109 0.32144
+0.26306 0.28204
+0.26503 0.33862
+0.267 0.36301
+0.26898 0.34124
+0.27095 0.36611
+0.27292 0.38299
+0.27489 0.44706
+0.27686 0.40819
+0.27883 0.38256
+0.2808 0.47243
+0.28277 0.42297
+0.28474 0.46439
+0.28671 0.49241
+0.28868 0.50755
+0.29065 0.56736
+0.29262 0.53169
+0.29459 0.53129
+0.29656 0.55587
+0.29853 0.60174
+0.3005 0.59515
+0.30247 0.61819
+0.30444 0.6017
+0.30641 0.61455
+0.30838 0.64584
+0.31035 0.6559
+0.31232 0.67615
+0.31428 0.68003
+0.31625 0.67171
+0.31822 0.64812
+0.32019 0.69363
+0.32216 0.7291
+0.32412 0.6867
+0.32609 0.70814
+0.32806 0.72292
+0.33003 0.71368
+0.33199 0.71216
+0.33396 0.7454
+0.33593 0.75491
+0.3379 0.75296
+0.33986 0.74639
+0.34183 0.77514
+0.3438 0.7786
+0.34576 0.75641
+0.34773 0.83761
+0.34969 0.76909
+0.35166 0.78355
+0.35362 0.8093
+0.35559 0.78766
+0.35756 0.75677
+0.35952 0.76993
+0.36149 0.73198
+0.36345 0.74506
+0.36541 0.77763
+0.36738 0.74336
+0.36934 0.75287
+0.37131 0.6718
+0.37327 0.68432
+0.37524 0.73714
+0.3772 0.62165
+0.37916 0.6263
+0.38113 0.64684
+0.38309 0.67834
+0.38505 0.55664
+0.38701 0.61999
+0.38898 0.61011
+0.39094 0.57876
+0.3929 0.54958
+0.39487 0.60227
+0.39683 0.54824
+0.39879 0.52684
+0.40075 0.50918
+0.40271 0.49839
+0.40467 0.53592
+0.40664 0.47685
+0.4086 0.51132
+0.41056 0.46529
+0.41252 0.42749
+0.41448 0.45308
+0.41644 0.35685
+0.4184 0.3835
+0.42036 0.37151
+0.42232 0.34328
+0.42428 0.36698
+0.42624 0.37363
+0.4282 0.36029
+0.43016 0.33721
+0.43211 0.324
+0.43407 0.30721
+0.43603 0.29694
+0.43799 0.26856
+0.43995 0.27225
+0.4419 0.2698
+0.44386 0.25623
+0.44582 0.26173
+0.44778 0.23269
+0.44973 0.21568
+0.45169 0.22301
+0.45365 0.19995
+0.4556 0.24261
+0.45756 0.19649
+0.45952 0.18042
+0.46147 0.19067
+0.46343 0.21139
+0.46538 0.15784
+0.46734 0.16233
+0.46929 0.18827
+0.47125 0.14317
+0.4732 0.15953
+0.47516 0.14198
+0.47711 0.14564
+0.47907 0.13595
+0.48102 0.13772
+0.48297 0.14429
+0.48493 0.14389
+0.48688 0.13057
+0.48883 0.13102
+0.49079 0.12141
+0.49274 0.12017
+0.49469 0.11527
+0.49664 0.12919
+0.49859 0.1291
+0.50055 0.10578
+0.5025 0.12477
+</textarea>
+  </p>
+
+
+
+<br>
+
+
+
+<input value="Send" type="submit">
+</form>
+
+
+
+</div>
+
+
+
+<hr style="width: 100%; height: 2px;">
+<center><a href="About.html">About this program</a></center>
+
+
+
+</div>
+
+
+</body>
+</html>
