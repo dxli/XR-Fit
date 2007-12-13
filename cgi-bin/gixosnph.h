@@ -34,7 +34,7 @@ modified to do nph-cgi
 #include <gsl/gsl_spline.h>
  
 #include "GARealGenome.h"
-#include "gixos_multilayer.h"
+#include "gixosmultilayer.h"
 #include "defines.h"
 #include "logUtility.h"
 

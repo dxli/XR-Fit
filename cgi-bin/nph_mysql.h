@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <config.h>
 #include <mysql++.h>
 
 #include <string>

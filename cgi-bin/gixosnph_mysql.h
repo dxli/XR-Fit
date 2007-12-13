@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
-#include "gixos_nph.h"
+#include "gixosnph.h"
 #include "Task.h"
 
 using namespace std;

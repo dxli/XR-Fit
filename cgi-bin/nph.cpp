@@ -51,7 +51,7 @@ void run(int taskId)
     cout<<"sigmad="<<task0.sigmad<<endl;
     if(task0.sigmad>0.5) {//start gixos instead
     logStream<<taskId;
-                execl("./gixos_nph","gixos_nph",logStream.str().c_str(),NULL);
+                execl("./gixosnph","gixosnph",logStream.str().c_str(),NULL);
     }
     if(updateStarted(taskId, 1) == -1) {
         WriteLog("Error updating progress of task");

@@ -1,6 +1,6 @@
-#include "gixos_multilayer.h"
+#include "gixosmultilayer.h"
 #include <iostream>
-#include "gixos_nph.h"
+#include "gixosnph.h"
 using namespace std;
 
 multilayer::multilayer( unsigned int i, double l,double dz00, double dz10)

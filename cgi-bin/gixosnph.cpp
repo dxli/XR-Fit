@@ -1,7 +1,7 @@
 
 
-#include "gixos_nph.h"
-#include "gixos_nph_mysql.h"
+#include "gixosnph.h"
+#include "gixosnph_mysql.h"
 #include "Task.h"
 #include "elements.h"
 

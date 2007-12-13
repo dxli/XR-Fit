@@ -1,4 +1,4 @@
-#include "gixos_nph.h"
+#include "gixosnph.h"
 
 double multilayer::cT(double t)
 //Transimission factoi T(sin\theta)
