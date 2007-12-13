@@ -1,4 +1,5 @@
 #general c++ compiling rule
+bindir = /var/www/localhost/cgi-bin
 AM_CPPFLAGS = -fomit-frame-pointer -fexpensive-optimizations
 bin_PROGRAMS =  nph dispatcher plotmc1 plotgixos gixosnph
 nph_SOURCES = nph.cpp

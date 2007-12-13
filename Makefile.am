@@ -1,1 +1,1 @@
-SUBDIRS = cgi-bin
+SUBDIRS = cgi-bin htdocs

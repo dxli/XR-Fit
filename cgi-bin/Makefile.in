@@ -151,7 +151,9 @@ am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
-bindir = @bindir@
+
+#general c++ compiling rule
+bindir = /var/www/localhost/cgi-bin
 build = @build@
 build_alias = @build_alias@
 build_cpu = @build_cpu@
@@ -190,8 +192,6 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-
-#general c++ compiling rule
 AM_CPPFLAGS = -fomit-frame-pointer -fexpensive-optimizations
 nph_SOURCES = nph.cpp
 nph_LDADD = GARealGenome.o multilayer.o logUtility.o Task.o nph_mysql.o elements.o file_copy.o
