@@ -3,16 +3,15 @@
 
 AC_PREREQ(2.61)
 AC_INIT(FULL-PACKAGE-NAME, VERSION, BUG-REPORT-ADDRESS)
-MY_SUBDIRS="cgi-bin"
-AC_SUBST(MY_SUBDIRS)
-AC_PROG_LIBTOOL
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADER([config.h])
 
 # Checks for programs.
+AC_PROG_CXX
 AC_PROG_CC
 AC_PROG_INSTALL
+AC_PROG_MAKE_SET
 
 # Checks for libraries.
 
@@ -33,12 +32,13 @@ AC_HEADER_TIME
 AC_FUNC_ERROR_AT_LINE
 AC_FUNC_FORK
 AC_FUNC_STRTOD
-AC_SEARCH_LIBS([pow, sqrt], [m])
-AC_SEARCH_LIBS([gsl_integration_qags], [gsl])
-AC_SEARCH_LIBS([GracePrintf], [grace_np],[],[echo "You have to install the grace_np devel files from the grace package"])
+AC_HAVE_LIBRARY([gsl],[],[echo "couldn't link -lgsl"])
+AC_HAVE_LIBRARY([gslcblas],[],[echo "couldn't link -lgsl"])
+AC_HAVE_LIBRARY([grace_np],[],[echo "couldn't link -lgsl"])
+AC_HAVE_LIBRARY([mysqlpp],[],[echo "couldn't link -lmysqlpp"])
 AC_CHECK_FUNCS([gettimeofday])
-AC_PROG_CXX
-AC_HAVE_LIBRARY(mysqlpp,[],[echo "\tmysql++ package not found"])
+
 AC_CONFIG_FILES([Makefile
-                 cgi-bin/Makefile])
+                 cgi-bin/Makefile
+                 htdocs/Makefile])
 AC_OUTPUT
