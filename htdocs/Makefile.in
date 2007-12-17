@@ -3,9 +3,11 @@ all:
 	echo "Nothing to do"
 
 install:
+	install -m755 -o apache -d ${htdir}; \
 	for f0 in xray.html config.php post.php last.php gixos.html \
 		post-gixos.php gixos-last.php ;\
 	do install -m644 -o apache -d ${htdir} ${f0}; \
-	done
+	done; 
+
 
 
