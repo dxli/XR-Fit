@@ -12,7 +12,7 @@
     $rhoin1 = $_POST['rhoin1'];
     $rhoin12 = $_POST['rhoin12'];
     if($_POST['top'] !="") {
-	$formula1=$_POST['maximum'];
+	$formula0=$_POST['top'];
     	if($_POST['top'] == "H2O" ) {
 	$rhoin0=0.998;
 	}
