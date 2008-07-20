@@ -1,5 +1,6 @@
 #include "GARealGenome.h"
 #include "logUtility.h"
+#include <cstdlib>
 
 
 GARealGenome::GARealGenome(int l,double min,double max)
