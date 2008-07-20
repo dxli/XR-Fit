@@ -86,7 +86,8 @@ int main(int argc, char *argv[])
     //for(int i=0;i<zf0.xi.size();i++) cout<<zf0.xi.at(i)<<" "<<zf0.yi.at(i)<<endl;
     string sfn2=fnref+".eps";
     string sid2(argv[2]);
-    if (GraceOpenVA("gracebat", 16384, "-nosafe", "-noask",NULL)==-1){
+    //if (GraceOpenVA("gracebat", 16384, "-nosafe", "-noask",NULL)==-1){
+    if (GraceOpen(16384)==-1){
         cerr<<"Can't run Grace. \n";
         exit(EXIT_FAILURE);
     }
@@ -240,6 +241,7 @@ int main(int argc, char *argv[])
         }
         if( jj> (unsigned int) ((double) 0.3*ye.size())) {
             //yes, we need to
+            cout<<"sqrt(dy)\n";
             for(unsigned int ii=0;ii<ye.size();ii++){
                 dye.at(ii)=sqrt(dye.at(ii));
             }
@@ -258,7 +260,6 @@ int main(int argc, char *argv[])
     }
     in2.close();
     //begin interpolation of the fitting curve, make the values at experimental positions
-    /*
     gsl_interp_accel *acc = gsl_interp_accel_alloc ();
     gsl_spline *spline = gsl_spline_alloc (gsl_interp_cspline, xf.size());
     gsl_spline_init (spline, &(xf.at(0)), &(yf.at(0)), xf.size());
@@ -279,11 +280,10 @@ int main(int argc, char *argv[])
     }
     ymax /= xmax;
     cout<<"Using "<<xmax<<", Rescale experimental data y *= "<<ymax<<endl;
-    */
     if(argc>=5) {
     	ymax=strtod(argv[4],NULL);
     }else {
-    	ymax=1.;
+    	if( xmax == 0.) ymax=1.;
     }
     cout<<"Rescale experimental data y *= "<<ymax<<endl;
     for(unsigned int i2=0;i2<xe.size();i2++){
@@ -372,11 +372,12 @@ int main(int argc, char *argv[])
     GracePrintf("device \"EPS\" OP \"color,level2,bbox:tight\"");
     GracePrintf("hardcopy device \"EPS\"");
     GracePrintf("print to \"%s\"",sfn2.c_str());
+    GracePrintf("redraw");
     GracePrintf("print");
     //GracePrintf("exit");
     //GraceFlush();
 
-    if(GraceIsOpen()) GraceClose();
+    //if(GraceIsOpen()) GraceClose();
     waitpid(-1,NULL,0);
     /*
     for(int ii=0;ii<20;ii++){
