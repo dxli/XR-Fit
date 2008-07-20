@@ -86,8 +86,8 @@ int main(int argc, char *argv[])
     //for(int i=0;i<zf0.xi.size();i++) cout<<zf0.xi.at(i)<<" "<<zf0.yi.at(i)<<endl;
     string sfn2=fnref+".eps";
     string sid2(argv[2]);
-    //if (GraceOpenVA("gracebat", 16384, "-nosafe", "-noask",NULL)==-1){
-    if (GraceOpen(16384)==-1){
+    if (GraceOpenVA("gracebat", 16384, "-nosafe", "-noask",NULL)==-1){
+    //if (GraceOpen(16384)==-1){
         cerr<<"Can't run Grace. \n";
         exit(EXIT_FAILURE);
     }
@@ -375,9 +375,9 @@ int main(int argc, char *argv[])
     GracePrintf("redraw");
     GracePrintf("print");
     //GracePrintf("exit");
-    //GraceFlush();
+    GraceFlush();
 
-    //if(GraceIsOpen()) GraceClose();
+    if(GraceIsOpen()) GraceClose();
     waitpid(-1,NULL,0);
     /*
     for(int ii=0;ii<20;ii++){
