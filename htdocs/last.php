@@ -20,6 +20,9 @@
     else
     {
         $email = mysql_result($result, 0, 'email');
+        if( $email == '' ){
+                $email="ref-$id.txt";
+        }
         $maxisteps = mysql_result($result, 0, 'maxisteps');
         $data = mysql_result($result, 0, 'data');
         $progress = mysql_result($result, 0, 'progress');
