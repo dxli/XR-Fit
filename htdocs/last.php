@@ -79,9 +79,10 @@
 		    echo "<img src='downloads/image-$id-$progress.png'><br></td>";
 		    echo "<td style='vertical-align:top;text-align:right'><table border='2'><tbody><tr><center><h3>Results</h3> (all units in &Aring)</center></tr>";
 		    echo "<tr><td><h4>Roughness</h4></td><td>$sigma0 &Aring</td></tr>";
-		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (Experimental)</td><td><a href='downloads/ref-$id.txt'>ref-$id.txt</a></td></tr>";
+		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (Experimental)</td><td><a href='downloads/ref-$id.txt'>$email</a></td></tr>";
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (best-fit)</td><td><a href='downloads/rf-$id-$progress.txt'>rf-$id-$progress.txt</a></td></tr>";
-		    echo "<tr><td><h4><a href='http://links.jstor.org/sici?sici=0027-8424(19870715)84%3A14%3C4709%3AROTLIO%3E2.0.CO%3B2-3'>Longitudinal Density Profile</a></h4></td><td><a href='downloads/rho-$id-$progress.txt'>rho-$id-$progress.txt</a></td></tr></tbody></table></td></tr></tbody></table>";
+                    echo "<tr><td><h4><a href='http://links.jstor.org/sici?sici=0027-8424(19870715)84%3A14%3C4709%3AROTLIO%3E2.0.CO%3B2-3'>Longitudinal Density Profile</a></h4></td><td><a href='downloads/rho-$id-$progress.txt'>rho-$id-$progress.txt</a></td></tr>";
+                    echo "</tbody></table></td></tr></tbody></table>";
 echo "<a href='view.php?id=$id'>View Progress</a><p>";
                     } else {
                             echo "Waiting for results (about 40 seconds each step) <br>";

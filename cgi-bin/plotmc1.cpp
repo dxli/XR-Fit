@@ -372,6 +372,7 @@ int main(int argc, char *argv[])
     GracePrintf("device \"EPS\" OP \"color,level2,bbox:tight\"");
     GracePrintf("hardcopy device \"EPS\"");
     GracePrintf("print to \"%s\"",sfn2.c_str());
+    printf("print to \"%s\"\n",sfn2.c_str());
     GracePrintf("redraw");
     GracePrintf("print");
     //GracePrintf("exit");
