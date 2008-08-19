@@ -13,6 +13,7 @@ modified to do nph-cgi
 ---------------------------------------------------------------------------- */
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <cstdlib>
 #include <cmath>
 #include <fstream>

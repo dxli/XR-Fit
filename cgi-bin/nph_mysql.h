@@ -2,9 +2,10 @@
 
 
 #include <config.h>
-#include <mysql++.h>
 
 #include <string>
+#include <cstring>
+#include <mysql++.h>
 #include <iostream>
 #include <cstdlib>
 #include "nph.h"
