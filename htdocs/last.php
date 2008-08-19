@@ -32,6 +32,8 @@
         $running =  mysql_result($result, 0, 'running');
         $error =  mysql_result($result, 0, 'error');
         $sigma0 =  mysql_result($result, 0, 'sigma0');
+        $slab =  mysql_result($result, 0, 'slab');
+        $nslab =  mysql_result($result, 0, 'nslab');
     }
 ?>
 
@@ -85,6 +87,8 @@
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (Experimental)</td><td><a href='downloads/ref-$id.txt'>$email</a></td></tr>";
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (best-fit)</td><td><a href='downloads/rf-$id-$progress.txt'>rf-$id-$progress.txt</a></td></tr>";
                     echo "<tr><td><h4><a href='http://links.jstor.org/sici?sici=0027-8424(19870715)84%3A14%3C4709%3AROTLIO%3E2.0.CO%3B2-3'>Longitudinal Density Profile</a></h4></td><td><a href='downloads/rho-$id-$progress.txt'>rho-$id-$progress.txt</a></td></tr>";
+                    echo "<tr><td>Interface thickness</td><td> $slab &Aring; </td></td>";
+                    echo "<tr><td>Number of slabs</td><td>$nslab</td></td>";
                     echo "</tbody></table></td></tr></tbody></table>";
 echo "<a href='view.php?id=$id'>View Progress</a><p>";
                     } else {
