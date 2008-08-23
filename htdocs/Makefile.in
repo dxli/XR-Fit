@@ -6,7 +6,7 @@ all:
 install:
 	install -m755 -o apache -d ${htdir}; \
 	install -m755 -o apache -t ${htdir} \
-	 xray.html config.php post.php last.php gixos.html \
+	 xray.html config.php post.php last.php stop.php gixos.html \
 		post-gixos.php gixos-last.php ;\
 
 

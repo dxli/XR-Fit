@@ -48,6 +48,7 @@ public:
     complex<double> rho_gene(double t);
     double objective(GARealGenome  *);
     void genomerf(GARealGenome *);
+    void genomerf(GARealGenome *,double,double,int);
     void mkdensity(GARealGenome *);
     double cT(double),yet_qz(double),sip_qz(double);
     void setbulk(double ,double ,double ,double ,double ,double );

@@ -149,6 +149,57 @@ inline double multilayer::rf(vector<xrdata>::iterator pref0)
 
 
 
+void multilayer::genomerf(GARealGenome * g, double qmin, double qmax, int nq)
+// output for forward calculation
+{
+    //if(g0.length() < nl+nl -3) {
+    //cout<<"Incorrect genome size "<<g0.size()<<endl;
+    //}
+    //cout<<dz0<<endl;
+    mkdensity(g);
+    unsigned int j,jj=nl-1;
+    double x=-1.5*dz0;
+    double rnorm=1./n_bulk1.real(),inorm=1./n_bulk1.imag();
+    ofstream out(fnrho.c_str());
+    for(j=0;j<=jj;j++) {
+        double r0;
+        int j0= (int) ( x/dz1+0.5)-dside;
+        if(j0<1) r0=0.; else r0=j0<glength?g->gene(j0):1.0;
+        r0 = rho_gene(r0).real()*rnorm;
+        out<<x<<' '<<nk[j].real()*rnorm<<' '<<r0<<' '<<nk[j].imag()*inorm<<endl;
+        x+=dz0;
+    }
+    out.close();
+    out.open(fnrf.c_str());
+    if(nq<1) nq=1;
+    double q;
+    if(qmax<qmin) {
+            q=qmin;qmin=qmax;qmax=q;
+    }
+    q=qmin;
+    double dq=(qmax-qmin)/nq;
+    if(qmax==qmin) nq=0;
+    //cout<<"qmin="<<qmin<<" qmax="<<qmax<<" nq="<<nq<<endl;
+    vector<xrdata> ref2;
+    int i=0;
+   {
+        // cout<<b*180./M_PI<<" "<<a<<endl;
+        // weighted using dyi[j], E(y) =  yi / dyi,
+        double t=q*lambda/(4*M_PI);
+            complex<double> a0=n_bulk0+t*t;
+        double fresnel0=1./fresnel(t);
+	ref2.push_back(xrdata(q,1.,1.,1.,1.,t,fresnel0,t,a0));
+        q += dq;
+    }while(i++<nq);
+
+
+vector<xrdata>::iterator pref2=ref2.begin();
+while(pref2 != ref2.end()){
+	out<<pref2->xi<<' '<<rf(pref2)*pref2->fresneli<<' '<<pref2->fresneli<<endl;
+	pref2++;
+}
+    out.close();
+}
 void multilayer::genomerf(GARealGenome * g)
 // output for plotting
 {

@@ -145,6 +145,7 @@ cout<<row["id"]<<endl;
             t->running = row["running"];
             t->done = row["done"];
             t->error = row["error"];
+            t->forward = row["forward"];
             t->rho0 = row["rho0"];
             t->rho1 = row["rho1"];
             t->rho12 = row["rho12"];
@@ -155,6 +156,7 @@ cout<<row["id"]<<endl;
             t->energy = row["energy"];
             t->qmin = row["qmin"];
             t->qmax = row["qmax"];
+            t->nq = row["nq"];
             t->nslab = row["nslab"];
             t->dth = row["dth"];
             t->alpha0 = row["alpha0"];
@@ -270,7 +272,7 @@ int updateDone(int id, bool done)
         unsigned int i = 0;
         con.connect(DATABASE, HOST, USER, PASSWORD);
         Query query = con.query();
-        strbuf << "UPDATE tasks SET done=" << done << ",started=-1,running=0 WHERE id=" << id;
+        strbuf << "UPDATE tasks SET done=" << done << ",started=-1,running=0,forward=0 WHERE id=" << id;
         query.exec(strbuf.str());
     }
     catch (const BadQuery& er)

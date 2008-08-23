@@ -225,13 +225,19 @@ if(task0.progress>=1) {
     *******************************************************************************/
     gettimeofday(&t_start,NULL);
     unsigned int isteps=task0.progress;
+    cout<<"forward="<<task0.forward<<endl;
     unsigned int isteps0=isteps;
+    int jj;
+    double x;
     vector<double> dgene;
+    if(task0.forward) {// forward calculation
+            goto plotresults;
+    }
     dgene.resize(genome.size());
-    for(int jj=0;jj<dgene.size();jj++) dgene.at(jj)=mc_step;
+    for(int jj1=0;jj1<dgene.size();jj1++) dgene.at(jj1)=mc_step;
     while(isteps < task0.maxisteps)
     {
-        for(unsigned int jj=0; jj<jmax;jj++)
+        for(unsigned int jj1=0; jj1<jmax;jj1++)
         {
             int jg=(int) ( random()/(RAND_MAX+1.0)*(1.15-0.15*exp(-score0/0.05))*dgene.size());
 	    if(jg>=dgene.size()) jg=0;
@@ -298,8 +304,8 @@ if(task0.progress>=1) {
         acc0=0;
 
         outfile.open(ml0.fnpop.c_str());
-        int jj=0;
-        double x=0.;
+        jj=0;
+        x=0.;
         outfile<<ii<<' '<<score20<<' '<<genome2.gene(jj++)<<endl;
         do
         {
@@ -318,10 +324,14 @@ if(task0.progress>=1) {
         int status;
         pid_t pid;
         waitpid(-1,&status, WNOHANG);
-        ml0.genomerf(&genome2);
         pid = fork ();
         if (pid == 0)
         {//child to generate image
+plotresults:
+       if(task0.forward)
+               ml0.genomerf(&genome2,task0.qmin,task0.qmax,task0.nq);
+       else
+               ml0.genomerf(&genome2);
             ostringstream sfnpng;
             sfnpng<<dl_folder<<"image-"<<taskId<<'-'<<isteps<<".png";
             string fnpng=sfnpng.str();
@@ -373,6 +383,9 @@ if(task0.progress>=1) {
 			WriteLog("ERROR: data file copying");
 		}
 		}
+            if( task0.forward ) { //updateDone for forward caculation
+                updateDone(taskId, true);
+            }
             exit(0);
             } else
         {

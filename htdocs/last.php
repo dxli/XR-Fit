@@ -34,6 +34,10 @@
         $sigma0 =  mysql_result($result, 0, 'sigma0');
         $slab =  mysql_result($result, 0, 'slab');
         $nslab =  mysql_result($result, 0, 'nslab');
+        $qmin =  mysql_result($result, 0, 'qmin');
+        if($qmin< 0.001) $qmin=0.001;
+        $qmax =  mysql_result($result, 0, 'qmax');
+        $nq =  mysql_result($result, 0, 'nq');
     }
 ?>
 
@@ -76,7 +80,7 @@
 		    if($progress>=$maxisteps) echo "<INPUT class=\"input\" TYPE=\"text\" NAME=\"isteps\" value=\"100\" size=\"3\" maxlength=\"3\"> more steps &nbsp";
 		    if($started<0) echo "<button value=\"0\" name=\"act\">Start</button>";
 		    }
-		    echo "</form>";
+		    
 		echo "<table style=\"text-align: center;\" border=\"0\"
  cellpadding=\"2\" cellspacing=\"2\"><tbody><tr><td>";
  		                    if($progress >= 1){ 
@@ -87,10 +91,13 @@
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (Experimental)</td><td><a href='downloads/ref-$id.txt'>$email</a></td></tr>";
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (best-fit)</td><td><a href='downloads/rf-$id-$progress.txt'>rf-$id-$progress.txt</a></td></tr>";
                     echo "<tr><td><h4><a href='http://links.jstor.org/sici?sici=0027-8424(19870715)84%3A14%3C4709%3AROTLIO%3E2.0.CO%3B2-3'>Longitudinal Density Profile</a></h4></td><td><a href='downloads/rho-$id-$progress.txt'>rho-$id-$progress.txt</a></td></tr>";
-                    echo "<tr><td>Interface thickness</td><td> $slab &Aring; </td></td>";
-                    echo "<tr><td>Number of slabs</td><td>$nslab</td></td>";
-                    echo "</tbody></table></td></tr></tbody></table>";
-echo "<a href='view.php?id=$id'>View Progress</a><p>";
+                   
+                    echo "<tr><td>Maximum Interface Thickness</td><td><INPUT class=\"input\" TYPE=\"text\" NAME=\"slab\" value=\"$slab\" size=\"5\" maxlength=\"5\"> &Aring; </td></tr>";
+                    echo "<tr><td>Number of slabs</td><td><INPUT class=\"input\" TYPE=\"text\" NAME=\"nslab\" value=\"$nslab\" size=\"4\" maxlength=\"4\"></td></tr>";
+                    echo "<tr><td>q<sub>Min</sub>=<INPUT class=\"input\" TYPE=\"text\" NAME=\"qmin\" value=\"$qmin\" size=\"5\" maxlength=\"5\">&Aring; <sup>-1</sup></sup></td><td>q<sub>Max</sub>=<INPUT class=\"input\" TYPE=\"text\" NAME=\"qmax\" value=\"$qmax\" size=\"5\" maxlength=\"5\">&Aring; <sup>-1</sup></td><td>Steps<INPUT class=\"input\" TYPE=\"text\" NAME=\"nq\" value=\"$nq\" size=\"5\" maxlength=\"5\"></td><td><input type=\"checkbox\" name=\"forward\" value=\"1\">Forward Calculation</td></tr>";
+                    echo "</tbody></table>";
+                    echo "</td></tr></tbody></table>";
+                    echo "</form>";
                     } else {
                             echo "Waiting for results (about 40 seconds each step) <br>";
                     }
