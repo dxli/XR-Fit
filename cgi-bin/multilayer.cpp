@@ -182,7 +182,7 @@ void multilayer::genomerf(GARealGenome * g, double qmin, double qmax, int nq)
     //cout<<"qmin="<<qmin<<" qmax="<<qmax<<" nq="<<nq<<endl;
     vector<xrdata> ref2;
     int i=0;
-   {
+   do {
         // cout<<b*180./M_PI<<" "<<a<<endl;
         // weighted using dyi[j], E(y) =  yi / dyi,
         double t=q*lambda/(4*M_PI);
