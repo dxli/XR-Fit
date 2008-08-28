@@ -23,7 +23,8 @@ class Task
         int started;
         int running;
         int error;
-        int forward; // forward XR calculation, if non-zero
+        int forward,fitbulk; // forward XR calculation, if non-zero; if none-zero, fit for bulk density
+        double bestfitbulk;
         bool done;
 	double rho0,rho1,rho12;//density of bulk0, bulk1, and maximum density allowed
 	double rhoin0,rhoin1,rhoin12;//density from input
