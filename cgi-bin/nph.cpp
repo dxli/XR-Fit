@@ -85,7 +85,8 @@ void run(int taskId)
     unsigned int j;
     ml0.setbulk(rhoBulk0,betaBulk0,rhoBulk1,betaBulk1,rhoBulk12,betaBulk12);
     double roughness0=1.35+0.2*log(task0.slab/75.); //we use log(sigma0)
-    ml0.glength=task0.nslab;
+    ml0.glength=task0.nslab+1; // add one gene to fit bulk density
+    
 
     ml0.qmin=task0.qmin;
     ml0.qmax=task0.qmax;
@@ -140,9 +141,10 @@ void run(int taskId)
     //cout<<"gene: [ "<<agene_min<<","<<agene_max<<"]\n";
 
 
-    GARealGenome genome(1+ml0.glength , double(0.),double(2.)),
-    genome1(1+ml0.glength , double(0.),double(2.)),
-    genome2(1+ml0.glength , double(0.),double(2.));
+    GARealGenome 
+            genome(1+ml0.glength , double(0.),double(2.)),
+            genome1(1+ml0.glength , double(0.),double(2.)),
+            genome2(1+ml0.glength , double(0.),double(2.));
     genome.randomize(MC_STEPSIZE);
     /*
         for(int jj=0;jj<genome.size();jj++) genome.gene(jj,(double) (g0[jj]* exp( -0.01*random()/(RAND_MAX+1.0))));
@@ -194,6 +196,7 @@ if(task0.progress>=1) {
         //cout<<"Using a random genome"<<endl;
         for(int jj=1;jj<genome1.size();jj++)
             genome1.gene(jj,(double) random()/(1.0+RAND_MAX)*2.0);
+        genome1.gene(genome1.size()-1,double(1.));
         genome1.gene(0,roughness0*0.2*(random()/(1.0+RAND_MAX)+4.5));
     }
 
@@ -233,7 +236,7 @@ if(task0.progress>=1) {
     if(task0.forward) {// forward calculation
             goto plotresults;
     }
-    dgene.resize(genome.size());
+    dgene.resize(genome.size() + task0.fitbulk -1 ); // freeze the last gene, unless fitbulk=1
     for(int jj1=0;jj1<dgene.size();jj1++) dgene.at(jj1)=mc_step;
     while(isteps < task0.maxisteps)
     {
@@ -368,7 +371,7 @@ plotresults:
                                          WriteLog(logStream.str().c_str());
                                      }
                 */
-                updateProgress(taskId, isteps,((int) (100.*exp(-1+2.*genome.gene(0))+0.5))/100.);
+                updateProgress(taskId, isteps,((int) (100.*exp(-1+2.*genome.gene(0))+0.5))/100., exp(0.5* ( genome2.gene(genome2.size()-1) -1. ))*rhoBulk1);
 		sfnpng.str("");
 		sfnpng<<'-'<<taskId<<'-'<<isteps<<".txt";
 		int icopy=0;

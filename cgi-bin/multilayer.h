@@ -34,7 +34,7 @@ public:
     string fnpop,fnref,fnrf,fnrho;
     unsigned int nl,glength,dside;
     //double rho_a,rho_b,beta_a,beta_b;
-    complex<double> n_bulk0,n_bulk1,n_bulk12;
+    complex<double> n_bulk0,n_bulk1,n_bulk10,n_bulk12;
     //double rho0,beta0,rho12,beta12;
     double lambda,k0;
     complex<double> kdz0; //k0*dz0*2i

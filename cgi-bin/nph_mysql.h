@@ -24,7 +24,7 @@ void getTask(Task * t, int id);
 int getNextTaskId();
 int getRunning(int);
 int getStarted(int);
-int updateProgress(int id, int progress,double);
+int updateProgress(int id, int progress,double,double);
 int updateStarted(int id, int started);
 int updateDone(int id, bool done);
 int updateRunning(int id, int running);

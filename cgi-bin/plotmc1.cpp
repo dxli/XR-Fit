@@ -280,11 +280,13 @@ int main(int argc, char *argv[])
     }
     ymax /= xmax;
     cout<<"Using "<<xmax<<", Rescale experimental data y *= "<<ymax<<endl;
+    /*
     if(argc>=5) {
     	ymax=strtod(argv[4],NULL);
     }else {
     	if( xmax == 0.) ymax=1.;
     }
+    */
     cout<<"Rescale experimental data y *= "<<ymax<<endl;
     for(unsigned int i2=0;i2<xe.size();i2++){
         ye.at(i2) *= ymax;

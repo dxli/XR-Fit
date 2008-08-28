@@ -103,7 +103,10 @@
 //    $rhoin1 = addslashes($rhoin1);
 //    $rhoin12 = addslashes($rhoin12);
     //end make data insertable
-
+    $fitbulk = $_POST['fitbulk'];
+    if ( $fitbulk != '1' ) {
+            $fitbulk = '0';
+    }
     //insert form data into db
     $link= mysql_connect($db_server,$db_username,$db_password);
     mysql_select_db($db_database) or die( "Unable to select database");

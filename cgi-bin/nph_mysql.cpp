@@ -146,6 +146,7 @@ cout<<row["id"]<<endl;
             t->done = row["done"];
             t->error = row["error"];
             t->forward = row["forward"];
+            t->fitbulk = row["fitbulk"];
             t->rho0 = row["rho0"];
             t->rho1 = row["rho1"];
             t->rho12 = row["rho12"];
@@ -190,7 +191,7 @@ cout<<row["id"]<<endl;
 
 
 
-int updateProgress(int id, int progress,double sigma0)
+int updateProgress(int id, int progress,double sigma0, double bestfitbulk)
 {
     Connection con(use_exceptions);
     try
@@ -199,7 +200,7 @@ int updateProgress(int id, int progress,double sigma0)
         unsigned int i = 0;
         con.connect(DATABASE, HOST, USER, PASSWORD);
         Query query = con.query();
-        strbuf << "UPDATE tasks SET progress=" << progress << ",sigma0="<<sigma0<<" WHERE id=" << id;
+        strbuf << "UPDATE tasks SET progress=" << progress << ",sigma0="<<sigma0<<",bestfitbulk="<<bestfitbulk<<" WHERE id=" << id;
         query.exec(strbuf.str());
     }
     catch (const BadQuery& er)

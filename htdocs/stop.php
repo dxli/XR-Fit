@@ -25,11 +25,15 @@
     $query = "UPDATE tasks set started=0,running=0,error=0,qmin=$qmin,qmax=$qmax,nq=$nq,forward=1,slab=$slab,nslab=$nslab WHERE id=$id";
     }else
     {        
-    $query = "UPDATE tasks set started=0,running=0,error=0,qmin=$qmin,qmax=$qmax,slab=$slab,nslab=$nslab WHERE id=$id";
+    $fitbulk = $_GET['fitbulk']; 
+    if ( $fitbulk != '1' ) {
+            $fitbulk='0';
+    }
+    $query = "UPDATE tasks set started=0,running=0,error=0,qmin=$qmin,qmax=$qmax,slab=$slab,nslab=$nslab,fitbulk=$fitbulk WHERE id=$id";
     }
     $result = mysql_query($query) or die(mysql_error($link));
     }else {
-      $query = "UPDATE tasks set started=-1 WHERE id=$id";
+      $query = "UPDATE tasks set started=-1,running=-1 WHERE id=$id";
     $result = mysql_query($query) or die(mysql_error($link));        
     }
             
