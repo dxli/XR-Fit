@@ -112,7 +112,7 @@
     mysql_select_db($db_database) or die( "Unable to select database");
     //$query = "INSERT INTO tasks(maxIsteps, email, data) VALUES($maxIsteps, '$email', '$data')";
     $date0 = date('U');
-    $query = "INSERT INTO tasks(started,date,progress,done,maxIsteps, email, data,formula0,formula1,formula12,rhoin0,rhoin1,rhoin12,slab,energy,qmin,qmax,nslab) VALUES(0,'$date0','0','0','$maxIsteps','$oldName', '$data','$formula0','$formula1','$formula12','$rhoin0','$rhoin1','$rhoin12','$slab','$energy','$qmin','$qmax','$nslab')";
+    $query = "INSERT INTO tasks(started,date,progress,done,maxIsteps, email, data,formula0,formula1,formula12,rhoin0,rhoin1,rhoin12,slab,energy,qmin,qmax,nslab,fitbulk) VALUES(0,'$date0','0','0','$maxIsteps','$oldName', '$data','$formula0','$formula1','$formula12','$rhoin0','$rhoin1','$rhoin12','$slab','$energy','$qmin','$qmax','$nslab','$fitbulk')";
     //die($query);
     mysql_query($query) or die( mysql_error($link) );
     mysql_close();

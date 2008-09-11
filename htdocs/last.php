@@ -34,6 +34,7 @@
         $sigma0 =  mysql_result($result, 0, 'sigma0');
         $slab =  mysql_result($result, 0, 'slab');
         $nslab =  mysql_result($result, 0, 'nslab');
+        $rhoB =  mysql_result($result, 0, 'rho1');
         $qmin =  mysql_result($result, 0, 'qmin');
         if($qmin< 0.001) $qmin=0.001;
         $qmax =  mysql_result($result, 0, 'qmax');
@@ -43,8 +44,9 @@
         $bestfitbulk =  mysql_result($result, 0, 'bestfitbulk');
         $checked='yes';
         } else {
+	$fitbulk = 0;
         $checked='no';
-        $bestfitbulk =  mysql_result($result, 0, 'rho1');
+        $bestfitbulk =  $rhoB;
         }
     }
 ?>
@@ -96,7 +98,12 @@
 		    echo "<img src='downloads/image-$id-$progress.png'><br></td>";
 		    echo "<td style='vertical-align:top;text-align:right'><table border='2'><tbody><tr><center><h3>Results</h3> (all units in &Aring)</center></tr>";
 		    echo "<tr><td><h4>Roughness</h4></td><td>$sigma0 &Aring</td></tr>";
-		    echo "<tr><td><h4>Bulk Electron Density ( &Aring; <sup>-3</sup>)</h4></td><td>$bestfitbulk</td><td><input type=\"checkbox\" name=\"fitbulk\" value=\"1\" checked=\"$checked\">Fit for bulk electron density</td></tr>";
+		    if ( $fitbulk == 1 ) {
+		    $rhoB = round($bestfitbulk/$rhoB,3);
+		    echo "<tr><td><h4>Bulk Electron Density </h4></td><td>$bestfitbulk ( &Aring; <sup>-3</sup>)<br>$rhoB &rho; <sub>Bulk</sub></td><td><input type=\"checkbox\" name=\"fitbulk\" value=\"1\" checked=\"yes\">Fit for bulk electron density</td></tr>";
+		    } else {
+		    echo "<tr><td><h4>Bulk Electron Density</h4></td><td>$bestfitbulk ( &Aring; <sup>-3</sup>)</td><td><input type=\"checkbox\" name=\"fitbulk\" value=\"1\">Fit for bulk electron density</td></tr>";
+		    }
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (Experimental)</td><td><a href='downloads/ref-$id.txt'>$email</a></td></tr>";
 		    echo "<tr><td><h4>R(q<sub>z</sub>)/R<sub>F</sub></h4> (best-fit)</td><td><a href='downloads/rf-$id-$progress.txt'>rf-$id-$progress.txt</a></td></tr>";
                     echo "<tr><td><h4><a href='http://links.jstor.org/sici?sici=0027-8424(19870715)84%3A14%3C4709%3AROTLIO%3E2.0.CO%3B2-3'>Longitudinal Density Profile</a></h4></td><td><a href='downloads/rho-$id-$progress.txt'>rho-$id-$progress.txt</a></td></tr>";
