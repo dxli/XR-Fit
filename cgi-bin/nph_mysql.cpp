@@ -16,7 +16,7 @@ int getNextTaskId()
 	Query query = con.query();
 	con.connect(DATABASE, HOST, USER, PASSWORD);
 	query << strbuf.str();
-	Result res = query.store();
+ StoreQueryResult res = query.store();
 	cout<<strbuf.str()<<endl;
 	
         if (res && res.num_rows() > 0)
@@ -55,7 +55,7 @@ int getNextTaskId()
     	Query query = con.query();
 	con.connect(DATABASE, HOST, USER, PASSWORD);
 	query << strbuf.str();
-	Result res = query.store();
+ StoreQueryResult res = query.store();
 	cout<<strbuf.str()<<endl;
 	mysqlpp::Row row;
 		row = res.at(0);
@@ -123,7 +123,7 @@ void getTask(Task * t, int id)
         Query query = con.query();
         con.connect(DATABASE, HOST, USER, PASSWORD);
         query << strbuf.str();
-        Result res = query.store();
+        StoreQueryResult res = query.store();
     
         if (res)
         {
@@ -391,7 +391,7 @@ int getStarted(int id)
         con.connect(DATABASE, HOST, USER, PASSWORD);
         strbuf << "select started from tasks WHERE id=" << id;
         query << strbuf.str();
-        Result res = query.store();
+        StoreQueryResult res = query.store();
     
         if (res)
         {
@@ -438,7 +438,7 @@ int getRunning(int id)
         con.connect(DATABASE, HOST, USER, PASSWORD);
         strbuf << "select running from tasks WHERE id=" << id;
         query << strbuf.str();
-        Result res = query.store();
+        StoreQueryResult res = query.store();
     
         if (res)
         {

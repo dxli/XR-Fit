@@ -1,6 +1,6 @@
 #general c++ compiling rule
 bindir = /var/www/localhost/cgi-bin
-AM_CPPFLAGS = -fomit-frame-pointer -fexpensive-optimizations
+AM_CPPFLAGS = -fomit-frame-pointer -fexpensive-optimizations -DMYSQLPP_MYSQL_HEADERS_BURIED
 bin_PROGRAMS =  nph dispatcher plotmc1 plotgixos gixosnph
 nph_SOURCES = nph.cpp
 nph_LDADD = GARealGenome.o multilayer.o logUtility.o Task.o nph_mysql.o elements.o file_copy.o
