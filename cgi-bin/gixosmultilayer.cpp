@@ -21,6 +21,7 @@ void multilayer::readref( string fn)
     sdyi=0.;
 
     istringstream iss (fn);
+    /*
     vector <double > va;
     std::copy (istream_iterator < double >(iss),
                istream_iterator < double >(), back_inserter (va));
@@ -28,8 +29,16 @@ void multilayer::readref( string fn)
     int jj= (va.size()/2)*2;
     for(int ii=0;ii<jj;ii+=2)
     {
-        x=fabs(va.at(ii));
-        y=va.at(ii+1);
+    */
+    ofstream out1(fnref.c_str());
+    string linebuf;
+    while(getline(iss,linebuf)){
+        vector <double > va;
+        istringstream iss2 (linebuf);
+        std::copy (istream_iterator < double >(iss2),istream_iterator < double >(), back_inserter (va));
+
+        x=va.at(0);
+        y=va.at(1);
 	out1<<x<<' '<<y<<endl;
             /*
             wt=y/dy;

@@ -347,7 +347,7 @@ if(task0.progress>=1) {
                 //WriteLog("Plotting: ./plotmc1 ");
                 //cerr<<"./plotmc1 "<<fnref.c_str()<<' '<<sid.str().c_str()<<endl;
                // cout<<"./plotmc1"<<"plotmc1"<<fnref.c_str()<<fnpng.c_str()<<logs1.str().c_str()<<ystr0.str().c_str()<<NULL;
-                execl("./plot_gixos","plot_gixos",fnref.c_str(),fnpng.c_str(),logs1.str().c_str(),ystr0.str().c_str(),NULL);
+                execl("./plotgixos","plotgixos",fnref.c_str(),fnpng.c_str(),logs1.str().c_str(),ystr0.str().c_str(),NULL);
             } else {
                 if(pid2<0) {
                     WriteLog("fork error!");
