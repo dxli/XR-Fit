@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
     GracePrintf("xaxis label \"\\+\\+z (\\f{Times-Roman}%c\\f{})\"",(unsigned char) 197);
     GracePrintf("yaxis label \"\\+\\+\\f{Symbol} r\\f{}(z)/\\f{Symbol}r\\f{}(\\f{Symbol}%c\\f{})\"",(unsigned char) 0xa5);
     GracePrintf("s2 hidden true");
-    //GracePrintf("s1 hidden true");
+    GracePrintf("s1 hidden true");
     //wait(NULL);
     GracePrintf("redraw");
     GraceFlush();
