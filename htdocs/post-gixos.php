@@ -77,7 +77,7 @@ $sigmad = $_POST['sigmad'];
     {
         $fileSize = $_FILES['uploaded']['size'];
 		//echo "Uploaded file size: $fileSize<br>";
-	if($fileSize > 20480 ) {
+	if($fileSize > 65535 ) {
 		echo "Uploaded file too big.<br>Please Back and try again.<br>";
 		exit;
 	}

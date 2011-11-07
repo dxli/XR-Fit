@@ -45,7 +45,7 @@
 
     $slab = $_POST['slab'];
     $nslab = $_POST['nslab'];
-    if(!($nslab>=1 && $nslab<=128)) $nslab=64; //use valid $nslab
+    if(!($nslab >= 1 && $nslab <= 128)) $nslab=64; //use valid $nslab
     $energy = $_POST['energy'];
     $qmin = $_POST['qmin'];
     $qmax = $_POST['qmax'];
@@ -53,10 +53,10 @@
     	$formula1="H2O";
 	$rhoin1=0.998;
     }
-    if(! ($energy >=1 && $energy<=100)) {
+    if(! ($energy >= 1 && $energy <= 100)) {
     	$energy=8.;
     }
-    if(! ($slab >=10 && $slab<=500)) {
+    if(! ($slab >= 10 && $slab<= 500)) {
     	$slab=45.;
     }
     if($qmin > $qmax) {
@@ -73,7 +73,7 @@
     {
         $fileSize = $_FILES['uploaded']['size'];
 		//echo "Uploaded file size: $fileSize<br>";
-	if($fileSize > 20480 ) {
+	if($fileSize > 65535 ) {
 		echo "Uploaded file too big.<br>Please Back and try again.<br>";
 		exit;
 	}
@@ -103,7 +103,7 @@
 //    $rhoin1 = addslashes($rhoin1);
 //    $rhoin12 = addslashes($rhoin12);
     //end make data insertable
-    $fitbulk = $_POST['fitbulk'];
+    //$fitbulk = $_POST['fitbulk'];
     if ( $fitbulk != '1' ) {
             $fitbulk = '0';
     }
