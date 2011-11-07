@@ -73,7 +73,7 @@ int getNextTaskId()
 		cout<<"rhoin0= "<<rhoin0<<endl;
 		cout<<"rhoin1= "<<rhoin1<<endl;
 		cout<<"rhoin12= "<<rhoin12<<endl;
-		compound::compound cmpd0(formula0,energy,rhoin0), cmpd1(formula1,energy,rhoin1), cmpd12(formula12,energy,rhoin12);
+		compound cmpd0(formula0,energy,rhoin0), cmpd1(formula1,energy,rhoin1), cmpd12(formula12,energy,rhoin12);
 		strbuf.str("");
         strbuf << "UPDATE tasks SET rho0="<<cmpd0.rho_el<<",rho1="<<cmpd1.rho_el<<",rho12="<<cmpd12.rho_el<<",beta0="<<cmpd0.beta<<",beta1="<<cmpd1.beta<<",beta12="<<cmpd12.beta<<" WHERE id="<< id;
         //cout<<strbuf.str()<<endl;

@@ -32,11 +32,12 @@ AC_HEADER_TIME
 AC_FUNC_ERROR_AT_LINE
 AC_FUNC_FORK
 AC_FUNC_STRTOD
-AC_HAVE_LIBRARY([gsl],[],[echo "couldn't link -lgsl"])
-AC_HAVE_LIBRARY([gslcblas],[],[echo "couldn't link -lgsl"])
-AC_HAVE_LIBRARY([grace_np],[],[echo "couldn't link -lgsl"])
-AC_HAVE_LIBRARY([mysqlpp],[],[echo "couldn't link -lmysqlpp"])
 AC_CHECK_FUNCS([gettimeofday])
+AC_HAVE_LIBRARY([grace_np],[],[echo "couldn't link -lgrace_np"])
+AC_HAVE_LIBRARY([mysqlpp],[],[echo "couldn't link -lmysqlpp"])
+AC_CHECK_LIB([gsl],[gsl_sf_erf],[], [echo "couldn't link gsl: -lgsl"
+              exit 1
+              ], [ -lgsl -lgslcblas -lm ])
 
 AC_CONFIG_FILES([Makefile
                  cgi-bin/Makefile
