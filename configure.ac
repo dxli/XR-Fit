@@ -37,7 +37,10 @@ AC_HAVE_LIBRARY([grace_np],[],[echo "couldn't link -lgrace_np"])
 AC_HAVE_LIBRARY([mysqlpp],[],[echo "couldn't link -lmysqlpp"])
 AC_CHECK_LIB([gsl],[gsl_sf_erf],[], [echo "couldn't link gsl: -lgsl"
               exit 1
-              ], [ -lgsl -lgslcblas -lm ])
+              ], [ -lgslcblas -lm ])
+AC_CHECK_LIB([gslcblas],[cblas_sasum],[], [echo "couldn't link gslcblas: -lgslcblas"
+              exit 1
+              ], [ -lgsl -lm ])
 
 AC_CONFIG_FILES([Makefile
                  cgi-bin/Makefile
