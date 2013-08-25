@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GARealGenome_H
+#define GARealGenome_H
+
 #include <vector>
 #include <cmath>
 #include <pthread.h>
@@ -33,4 +35,5 @@ public:
     //random jumping of the genome
     void randomize(double x);
 };
+#endif
 

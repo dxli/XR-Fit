@@ -11,10 +11,15 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = stochfitQt
 TEMPLATE = app
 
+LIBS += -lgsl -lgslcblas -lm
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    multilayer.cpp \
+    GARealGenome.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    multilayer.h \
+    GARealGenome.h
 
 FORMS    += mainwindow.ui

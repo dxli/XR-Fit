@@ -50,12 +50,12 @@ void GARealGenome::adjust(int jj, double x)
 	genome.at(jj) =fabs(fmod(genome.at(jj)+x +dgene,dgene2)-dgene);
 	}
 
-void GARealGenome::randomize(double x)
+void GARealGenome::randomize(double /*x*/)
 { //random jumping of the genome
 	//genome.at(0) *= exp((random()/(RAND_MAX+1.0)-0.5)*x);
 	double a=0.15*dgene;
-	for(int jj=0;jj<genome.size();jj++) {
-	genome.at(jj) =fabs(fmod( genome.at(jj) +a*(random()/(RAND_MAX+1.0)-0.5) +dgene,dgene2)-dgene);
+    for(unsigned jj=0;jj<genome.size();jj++) {
+        genome.at(jj) =fabs(fmod( genome.at(jj) +a*(random()/(RAND_MAX+1.0)-0.5) +dgene,dgene2)-dgene);
 	}
 };
 

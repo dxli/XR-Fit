@@ -1,4 +1,6 @@
 #pragma once
+#ifndef MultiLayer_H
+#define MultiLayer_H
 #include <vector>
 #include <complex>
 #include <fstream>
@@ -53,4 +55,4 @@ public:
     double cT(double),yet_qz(double),sip_qz(double);
     void setbulk(double ,double ,double ,double ,double ,double );
 };
-
+#endif

@@ -64,18 +64,18 @@ void multilayer::readref( string fn)
     }
     out1.close();
     sdyi = 1./sdyi;
-    //cout<<xi.size()<<"\t"<<sdyi<<endl;
-    //write out reflectivity data
-    // cout<<"Writing: "<<fnref<<endl;
-    string::size_type locr=fnref.rfind(".",fnref.size());
-    string::size_type locl=fnref.rfind("-",fnref.size());
-    if (locr != string::npos) {
-        string fnref0=string("tmpout-")+fnref.substr(locl+1, locr-locl-1)+string("-ref.dat");
-        cout<<"cp "<<fnref<<" "<<fnref0<<endl;
-        if (file_copy(fnref, fnref0)) {
-            cout<<"Error: cp "<<fnref<<" "<<fnref0<<endl;
-        }
-    }
+//    //cout<<xi.size()<<"\t"<<sdyi<<endl;
+//    //write out reflectivity data
+//    // cout<<"Writing: "<<fnref<<endl;
+//    string::size_type locr=fnref.rfind(".",fnref.size());
+//    string::size_type locl=fnref.rfind("-",fnref.size());
+//    if (locr != string::npos) {
+//        string fnref0=string("tmpout-")+fnref.substr(locl+1, locr-locl-1)+string("-ref.dat");
+//        cout<<"cp "<<fnref<<" "<<fnref0<<endl;
+//        if (file_copy(fnref, fnref0)) {
+//            cout<<"Error: cp "<<fnref<<" "<<fnref0<<endl;
+//        }
+//    }
     //ak.at(0)=1.;
     kdz0=complex<double>(0,2)*k0*dz0;
     //xi for plotting rf()
@@ -164,7 +164,7 @@ void multilayer::genomerf(GARealGenome * g, double qmin, double qmax, int nq)
     ofstream out(fnrho.c_str());
     for (j=0;j<=jj;j++) {
         double r0;
-        int j0= (int) ( x/dz1+0.5)-dside;
+        unsigned j0= (unsigned) ( x/dz1+0.5)-dside;
         if (j0<1) r0=0.;
         else r0=j0<glength-1?g->gene(j0):1.0; // the last gene is for bulk density
         r0 = rho_gene(r0).real()*rnorm;
@@ -219,7 +219,7 @@ void multilayer::genomerf(GARealGenome * g)
     ofstream out(fnrho.c_str());
     for (j=0;j<=jj;j++) {
         double r0;
-        int j0= (int) ( x/dz1+0.5)-dside;
+        unsigned j0= (unsigned) ( x/dz1+0.5)-dside;
         if (j0<1) r0=0.;
         else r0=j0<glength-1?g->gene(j0):1.0;
         r0 = rho_gene(r0).real()*rnorm;
@@ -267,24 +267,23 @@ void multilayer::mkdensity(GARealGenome * g)
     nk0.push_back(n_bulk0);
     for (i=1;i<g->size()-1;i++) nk0.push_back(rho_gene(g->gene(i)));
     nk0.push_back(n_bulk1);
-    for (i=1;i<nk0.size();i++) dnk0.push_back( 0.5*(nk0.at(i) - nk0.at(i-1)));
+    for (size_t i0=1;i0<nk0.size();i0++) dnk0.push_back( 0.5*(nk0.at(i0) - nk0.at(i0-1)));
     complex<double> d0;
-    int j;
     double z,idz1=dz0/dz1;
 //#pragma omp parallel for private( i,j,z,zrange,isigmas2,d0 )
-    for (i=0;i<nl;i++) {
-        z=(i-0.5)*idz1;
+    for (unsigned i0=0;i0<nl;i0++) {
+        z=(i0-0.5)*idz1;
         int il= (int) (z-zrange2)-1;
         if (il<0) il=0;
-        int ir= (int) (z)+1;
+        unsigned ir= (unsigned) (z)+1;
         if (ir>dnk0.size()) ir=dnk0.size();
         d0=nk0.at(il);
         z -= il+zrange;
-        for (j=il;j<ir;j++) {
-            d0 += (1.+gsl_sf_erf (z*isigmas2))*dnk0.at(j);
+        for (unsigned j0=il;j0<ir;j0++) {
+            d0 += (1.+gsl_sf_erf (z*isigmas2))*dnk0.at(j0);
             z -= 1.;
         }
-        nk.at(i)=d0;
+        nk.at(i0)=d0;
     }
     nk.at(nl-1)=n_bulk1;
     //debug
@@ -306,7 +305,7 @@ double multilayer::objective(GARealGenome * g)
     double sy=0.,sy2=0.,a;
     int nmax=ref0.size();
     //double d= g0.gene(0);
-#pragma omp parallel for reduction(+:sy,sy2) private( a ) schedule(static)
+//#pragma omp parallel for reduction(+:sy,sy2) private( a ) schedule(static)
     //while(pref0 !=ref0.end()){
     //for(vector<xrdata>::iterator pref0=ref0.begin(); pref0 !=ref0.end();pref0++){
     for (int i=0;i<nmax;i++) {
