@@ -16,10 +16,12 @@ LIBS += -lgsl -lgslcblas -lm
 SOURCES += main.cpp\
         mainwindow.cpp \
     multilayer.cpp \
-    GARealGenome.cpp
+    GARealGenome.cpp \
+    elements.cpp
 
 HEADERS  += mainwindow.h \
     multilayer.h \
-    GARealGenome.h
+    GARealGenome.h \
+    elements.h
 
 FORMS    += mainwindow.ui

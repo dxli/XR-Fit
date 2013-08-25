@@ -36,7 +36,7 @@ element::element (string ele0,double en0)
     }
     //Find the element_symbol
     string linebuf;
-    int i=0;
+    unsigned i=0;
     while(i<ele.size() && isalpha(ele.at(i))){
         if(i) ele.at(i)=tolower(ele.at(i)); else ele.at(i)=toupper(ele.at(i));
         if(i++>=1) break;
@@ -143,7 +143,7 @@ double element::formFactor_f1()
     string linebuf;
     vector<vector<double> > nff;
     vector<vector<double> >::iterator pnff;
-    int il=0;
+//    int il=0;
     double x0=0.,x1=0.,x2=0.;
     while(getline(in0,linebuf)){
         string::size_type loc=linebuf.find("E",0);
@@ -182,7 +182,7 @@ beta=0.;
     vector<int> n0;
     string c1=c0;
     //read formula
-    int j=0;
+    unsigned j=0;
     while(j<c1.size()) { //parse the formula
         string ele;
 	//cout<<c1.at(j)<<endl;
@@ -216,9 +216,9 @@ beta=0.;
     ostringstream f0;
     amass=0.;
     double mabs0=0.;
-    double mu0=0.;
+//    double mu0=0.;
     f1=0.;
-    for(int i=0;i<el0.size();i++){
+    for(unsigned i=0;i<el0.size();i++){
         f0<<el0.at(i)<<n0.at(i);
         element ele1(el0.at(i),en0);
         els.push_back(ele1);
